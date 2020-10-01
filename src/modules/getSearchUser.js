@@ -1,6 +1,9 @@
-import axios from "axios"
+import axios from "axios";
 
 const getSearchUser = async () => {
-  let response= await axios.get("/search");
-  return response.items
-}
+  let response = await axios.get("/search");
+  debugger
+  return response;
+};
+
+export { getSearchUser };
