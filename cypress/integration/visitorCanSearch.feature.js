@@ -3,7 +3,7 @@ describe('Visitor can search Github registry of users', () => {
     cy.server();
     cy.route({
       method: "GET",
-      url: "https://api.github.com/search/users?q=${'name'}",
+      url: "https://api.github.com/search/users?q=Tom",
       response: "fixture:searchResgistryOfUsers.json",
     });
   })
