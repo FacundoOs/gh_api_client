@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 import { Button, Input } from "semantic-ui-react";
-// import { getSearchUser} from "../modules/getSearchUser"
 import axios from "axios";
 
 class GHSearch extends Component {
   state = {
     items: [],
+    value: "",
+  };
+
+  onChangeHandler = (e) => {
+    this.setState({ value: e.target.value });
   };
 
   searchUser = async () => {
-    let response = await axios.get("https://api.github.com/search/users?q=tom");
-    debugger
+    let response = await axios.get(
+      `https://api.github.com/search/users?q=${this.state.value}`
+    );
     this.setState({
-      items: response.data.items
+      items: response.data.items,
     });
   };
 
   render() {
-    debugger
     let dataShow = this.state.items.map((show) => {
       return (
-        <div class="display-show" data-cy="display-show">
+        <p class="display-show" data-cy="display-show">
           {show.login}
-        </div>
+        </p>
       );
     });
     return (
@@ -32,6 +36,7 @@ class GHSearch extends Component {
           type="text"
           name="search"
           placeholder="Input GH username"
+          onChange={this.onChangeHandler}
         />
         <Button onClick={this.searchUser} data-cy="search" name="search">
           Search
